@@ -1,22 +1,30 @@
 import React, {Component} from 'react';
 import {AppRegistry, StyleSheet, Text, View, Platform} from 'react-native';
-import {getMoviesFromApiAsync} from '../Controller/ImageController';
+import {ImageController} from '../Controller/ImageController';
 
 export class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            imageURL: "empty"
+        }
+
+        var me = this;
+        ImageController.getImageURL("http://localhost:3333/imageB", function(msg){
+            me.setState({
+                imageURL: msg
+            });
+        });
+    }
+
     render() {
-        const imagePath = getMoviesFromApiAsync();
-        console.log(imagePath);
-        imagePath.then((message) => {
-            console.log("-----response------");
-            console.log(message.json());
-        })
         return (
             <View style={styles.container}>
                 <Text style={styles.welcome}>
                     Hello Friend! This is {Platform.OS} view!!!
                 </Text>
                 <Text>
-                    Image Path:
+                    Image Path: {this.state.imageURL}
                 </Text>
             </View>
         );

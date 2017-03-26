@@ -1,20 +1,17 @@
 import React, {Component} from 'react';
-import {AppRegistry, StyleSheet, Text, View, Platform} from 'react-native';
+import {AppRegistry, StyleSheet, Text, View, Platform, Button} from 'react-native';
+import ImageRenderer from './ImageRenderer';
 import {ImageController} from '../Controller/ImageController';
 
 export class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            imageURL: "empty"
-        }
 
-        var me = this;
-        ImageController.getImageURL("http://localhost:3333/imageB", function(msg){
-            me.setState({
-                imageURL: msg
-            });
-        });
+        this.setBeautyAndtheBeastImage = this.setBeautyAndtheBeastImage.bind(this);
+        this.setTestImage = this.setTestImage.bind(this);
+        this.state = {
+            imageUri: "https://raw.githubusercontent.com/CheolminConanShin/CLD/master/test.jpeg"
+        }
     }
 
     render() {
@@ -23,11 +20,37 @@ export class App extends Component {
                 <Text style={styles.welcome}>
                     Hello Friend! This is {Platform.OS} view!!!
                 </Text>
-                <Text>
-                    Image Path: {this.state.imageURL}
-                </Text>
+                <ImageRenderer imageUri={this.state.imageUri}/>
+                <Button
+                    onPress={this.setBeautyAndtheBeastImage}
+                    title="BeautyAndTheBeast"
+                />
+                <Button
+                    onPress={this.setTestImage}
+                    title="Test"
+                />
             </View>
         );
+    }
+
+    setBeautyAndtheBeastImage() {
+        var me = this;
+        ImageController.getImage("beautyandthebeast", function(imageUri){
+            console.log(imageUri);
+            me.setState({
+                imageUri: imageUri
+            })
+        })
+    }
+
+    setTestImage() {
+        var me = this;
+        ImageController.getImage("test", function(imageUri){
+            console.log(imageUri);
+            me.setState({
+                imageUri: imageUri
+            })
+        })
     }
 }
 

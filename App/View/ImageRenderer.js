@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Image, Text} from 'react-native';
+import {Image} from 'react-native';
 
 export default class ImageRenderer extends Component {
     styles = {

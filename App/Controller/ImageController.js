@@ -1,5 +1,6 @@
 export var ImageController = {
-    getImageURL: function(url, callback) {
+    baseURL: "http://localhost:3333/",
+    getImage: function(url, callback) {
         var xhr = new XMLHttpRequest();
 
         xhr.ontimeout = function () {
@@ -16,7 +17,7 @@ export var ImageController = {
             }
         };
 
-        xhr.open("GET", url, true);
+        xhr.open("GET", ImageController.baseURL + url, true);
         xhr.timeout = 2000;
         xhr.send(null);
     }

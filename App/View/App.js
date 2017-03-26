@@ -10,7 +10,7 @@ export class App extends Component {
         this.setBeautyAndtheBeastImage = this.setBeautyAndtheBeastImage.bind(this);
         this.setTestImage = this.setTestImage.bind(this);
         this.state = {
-            imageUri: "https://raw.githubusercontent.com/CheolminConanShin/CLD/master/test.jpeg"
+            imageUri: "https://img.clipartfest.com/227e49f534f43347b030d1ba6a6767f5_hand-select-icon-select_512-512.png"
         }
     }
 
@@ -24,10 +24,12 @@ export class App extends Component {
                 <Button
                     onPress={this.setBeautyAndtheBeastImage}
                     title="BeautyAndTheBeast"
+                    style={styles.button}
                 />
                 <Button
                     onPress={this.setTestImage}
                     title="Test"
+                    style={styles.button}
                 />
             </View>
         );
@@ -36,7 +38,6 @@ export class App extends Component {
     setBeautyAndtheBeastImage() {
         var me = this;
         ImageController.getImage("beautyandthebeast", function(imageUri){
-            console.log(imageUri);
             me.setState({
                 imageUri: imageUri
             })
@@ -46,7 +47,6 @@ export class App extends Component {
     setTestImage() {
         var me = this;
         ImageController.getImage("test", function(imageUri){
-            console.log(imageUri);
             me.setState({
                 imageUri: imageUri
             })
